@@ -1,15 +1,21 @@
 version: '{build}'
+
 branches:
   only:
   - master
+
 clone_folder: c:\projects\cmake-init
+
 image:
-- Visual Studio 2015
+- Visual Studio 2017
+
 configuration:
 - Release
+
 platform:
 - x64
 - x32
+
 matrix:
   fast_finish: true
 
@@ -23,8 +29,15 @@ init:
 - if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2015" ( set generator="Visual Studio 14 2015%arch%" )
 - if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2013" ( set generator="Visual Studio 12 2013%arch%" )
 - echo %generator%
+- set NINJA_URL="https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-win.zip"
+- appveyor DownloadFile %NINJA_URL% -FileName ninja.zip
+- 7z x ninja.zip -oC:\projects\deps\ninja > nul
+- set PATH=C:\projects\deps\ninja;%PATH%
+- ninja --version
 
 before_build:
+  # Required by -Gninja
+- call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" amd64
 - cmd: |-
     git clone --branch v2.1.1 https://github.com/GMLC-TDC/HELICS
     cd HELICS
