@@ -31,8 +31,8 @@ before_build:
     mkdir build
     cd build
     cmake --version
-    cmake .. -G %generator% -DBOOST_ROOT=C:\Libraries\boost_1_67_0
-    cmake --build . --config Release --target install
+    cmake .. -G %generator% –GNinja -DBOOST_ROOT=C:\Libraries\boost_1_67_0
+    ninja
 
 build:
   parallel: true
