@@ -62,7 +62,7 @@ set -e
 
 wget https://github.com/GMLC-TDC/HELICS-src/archive/v$HELICS_VERSION.tar.gz
 tar -xzf v$HELICS_VERSION.tar.gz
-
+ls
 set +e
 cd HELICS-src-$HELICS_VERSION
 set -e
