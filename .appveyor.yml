@@ -41,10 +41,9 @@ before_build:
     cd HELICS
     mkdir build
     cd build
-    mkdir Ninja
     cmake --version
-    cmake .. -G "%GENERATOR%" –G Ninja -DBOOST_ROOT=C:\Libraries\boost_1_67_0
-    ninja
+    cmake .. -G "%GENERATOR%" -DBOOST_ROOT=C:\Libraries\boost_1_67_0
+    cmake --build . --config Release --target install
 
 build:
   parallel: true
