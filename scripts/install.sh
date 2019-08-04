@@ -60,7 +60,7 @@ cd ..
 cd ..
 set -e
 
-git clone --branch v$HELICS_VERSION https://github.com/GMLC-TDC/HELICS/archive/v$HELICS_VERSION.tar.gz
+git clone --branch v$HELICS_VERSION https://github.com/GMLC-TDC/HELICS.git
 set +e
 cd HELICS
 set -e
