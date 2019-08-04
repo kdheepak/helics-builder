@@ -60,11 +60,9 @@ cd ..
 cd ..
 set -e
 
-wget https://github.com/GMLC-TDC/HELICS-src/archive/v$HELICS_VERSION.tar.gz
-tar -xzf v$HELICS_VERSION.tar.gz
-ls
+git clone --branch v$HELICS_VERSION https://github.com/GMLC-TDC/HELICS/archive/v$HELICS_VERSION.tar.gz
 set +e
-cd HELICS-$HELICS_VERSION
+cd HELICS
 set -e
 mkdir -p build
 set +e
