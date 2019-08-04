@@ -64,7 +64,7 @@ wget https://github.com/GMLC-TDC/HELICS-src/archive/v$HELICS_VERSION.tar.gz
 tar -xzf v$HELICS_VERSION.tar.gz
 ls
 set +e
-cd HELICS-src-$HELICS_VERSION
+cd HELICS-$HELICS_VERSION
 set -e
 mkdir -p build
 set +e
