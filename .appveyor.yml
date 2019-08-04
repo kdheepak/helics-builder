@@ -25,14 +25,14 @@ matrix:
 
 # skip unsupported combinations
 init:
-- echo %APPVEYOR_BUILD_WORKER_IMAGE%
-- echo %GENERATOR%
+  - echo %APPVEYOR_BUILD_WORKER_IMAGE%
+  - echo %GENERATOR%
 
 install:
-    - mkdir C:\ninja
-    - appveyor DownloadFile https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip -FileName ninja.zip
-    - 7z x ninja.zip -oC:\ninja > nul
-    - set PATH=C:\ninja;%PATH%
+  - mkdir C:\ninja
+  - appveyor DownloadFile https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip -FileName ninja.zip
+  - 7z x ninja.zip -oC:\ninja > nul
+  - set PATH=C:\ninja;%PATH%
 
 before_build:
 - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" amd64
