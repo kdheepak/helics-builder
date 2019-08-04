@@ -7,6 +7,17 @@ branches:
 image:
 - Visual Studio 2017
 
+environment:
+  matrix:
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      platform: x32
+      GENERATOR: Visual Studio 15 2017
+
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      platform: x64
+      GENERATOR: Visual Studio 15 2017 Win64
+
+
 configuration:
 - Release
 
@@ -19,30 +30,24 @@ matrix:
 
 # skip unsupported combinations
 init:
-- set arch=
-- if "%arch%"=="Win64" ( set arch= Win64)
-- echo %arch%
 - echo %APPVEYOR_BUILD_WORKER_IMAGE%
-- if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2017" ( set generator="Visual Studio 15 2017%arch%" )
-- if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2015" ( set generator="Visual Studio 14 2015%arch%" )
-- if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2013" ( set generator="Visual Studio 12 2013%arch%" )
-- echo %generator%
+- echo %GENERATOR%
+
+install:
+    - mkdir C:\ninja
+    - appveyor DownloadFile https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip -FileName ninja.zip
+    - 7z x ninja.zip -oC:\ninja > nul
+    - set PATH=C:\ninja;%PATH%
 
 before_build:
 - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" amd64
-- cmd: |-
-    set NINJA_URL="https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-win.zip"
-    appveyor DownloadFile %NINJA_URL% -FileName ninja.zip
-    7z x ninja.zip -oC:\projects\deps\ninja > nul
-    set PATH=C:\projects\deps\ninja;%PATH%
-    ninja --version
 - cmd: |-
     git clone --branch v2.1.1 https://github.com/GMLC-TDC/HELICS
     cd HELICS
     mkdir build
     cd build
     cmake --version
-    cmake .. -G %generator% –GNinja -DBOOST_ROOT=C:\Libraries\boost_1_67_0
+    cmake .. -G %GENERATOR% –G Ninja -DBOOST_ROOT=C:\Libraries\boost_1_67_0
     ninja
 
 build:
