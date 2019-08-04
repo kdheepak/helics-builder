@@ -72,10 +72,10 @@ cd build
 set -e
 
 if [[ $TRAVIS_OS_NAME == "windows" ]]; then
-    cmake -DBOOST_ROOT="$HOME/helics" -DZeroMQ_ROOT_DIR="$HOME/helics" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="$HOME/helics" -DBoost_USE_STATIC_LIBS=ON -G"Visual Studio 15 2017 Win64" -GNinja ..
+    cmake -DBOOST_ROOT="$HOME/helics" -DZeroMQ_ROOT_DIR="$HOME/helics" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="$HOME/helics" -DBoost_USE_STATIC_LIBS=ON -G"Visual Studio 15 2017 Win64" -GNinja -DENABLE_PACKAGE_BUILD=ON -DBUILD_RELEASE_ONLY=ON -DBUILD_C_SHARED_LIB=ON -DBUILD_SHARED_LIBS=ON -DBUILD_PYTHON_INTERFACE=ON -DENABLE_SWIG=OFF ..
     cmake --build . --config Release --target install
 else
-    cmake -DBOOST_ROOT="$HOME/helics" -DZeroMQ_ROOT_DIR="$HOME/helics" -DCMAKE_INSTALL_PREFIX="$HOME/helics" ..
+    cmake -DBOOST_ROOT="$HOME/helics" -DZeroMQ_ROOT_DIR="$HOME/helics" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="$HOME/helics" -DENABLE_PACKAGE_BUILD=ON -DBUILD_RELEASE_ONLY=ON -DBUILD_C_SHARED_LIB=ON -DBUILD_SHARED_LIBS=ON -DBUILD_PYTHON_INTERFACE=ON -DENABLE_SWIG=OFF ..
     make -j4
     make install
 fi
