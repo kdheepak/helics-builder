@@ -42,9 +42,25 @@ before_build:
     mkdir build
     cd build
     cmake --version
-    cmake .. -G "%GENERATOR%" -DBOOST_ROOT=C:\Libraries\boost_1_67_0
+    cmake .. -G "%GENERATOR%" -DBOOST_ROOT=C:\Libraries\boost_1_67_0 -DENABLE_PACKAGE_BUILD=ON -DBUILD_RELEASE_ONLY=ON -DBUILD_C_SHARED_LIB=ON -DBUILD_SHARED_LIBS=ON
     cmake --build . --config Release --target install
 
 build:
+  project: HELICS/build/HELICS.sln
   parallel: true
+  verbosity: minimal
+
+after_build:
+  - cd HELICS/build
+  - cpack -B %cd%/installer-output
+
+artifacts:
+  - path: build/installer-output/Helics-*.exe
+
+only_commits:
+  files:
+    - CMakeLists.txt
+    - appveyor.yml
+    - src/
+    - cmake/
 
