@@ -15,16 +15,16 @@ environment:
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       platform: x32
       GENERATOR: Visual Studio 15 2017
-      PYTHON: "C:\\Python27.10"
-      PYTHON_VERSION: "2.7.10"
-      PYTHON_ARCH: "32"
+      # PYTHON: "C:\\Python27.10"
+      # PYTHON_VERSION: "2.7.10"
+      # PYTHON_ARCH: "32"
 
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       platform: x64
       GENERATOR: Visual Studio 15 2017 Win64
-      PYTHON: "C:\\Python27.10-x64"
-      PYTHON_VERSION: "2.7.10"
-      PYTHON_ARCH: "64"
+      # PYTHON: "C:\\Python27.10-x64"
+      # PYTHON_VERSION: "2.7.10"
+      # PYTHON_ARCH: "64"
 
 matrix:
   fast_finish: true
@@ -36,7 +36,7 @@ init:
 
 install:
   # Install Python (from the official .msi of https://python.org) and pip when not already installed.
-  - ps: if (-not(Test-Path($env:PYTHON))) { & appveyor\install.ps1 }
+  # - ps: if (-not(Test-Path($env:PYTHON))) { & appveyor\install.ps1 }
   # Prepend newly installed Python to the PATH of this build (this cannot be
   # done from inside the powershell script as it would require to restart
   # the parent CMD process).
@@ -57,7 +57,7 @@ install:
 
 
 before_build:
-  - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" amd64
+  - set Platform=
   - cmd: |-
       git clone --branch v2.1.1 https://github.com/GMLC-TDC/HELICS
       cd HELICS
