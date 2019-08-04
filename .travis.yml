@@ -1,9 +1,5 @@
 matrix:
   include:
-    - os: windows
-      language: sh
-      env: PYTHON_ARCH="64" MATRIX_EVAL=""
-      filter_secrets: false
     - os: linux
       dist: trusty
       language: cpp
@@ -28,7 +24,7 @@ matrix:
 
 before_install:
     - eval "${MATRIX_EVAL}"
-    - export HELICS_VERSION="2.0.0"
+    - export HELICS_VERSION="2.1.1"
     - if [[ $TRAVIS_OS_NAME == "windows" ]]; then choco install ninja; fi
 
 install:
