@@ -7,6 +7,9 @@ branches:
 image:
 - Visual Studio 2017
 
+configuration:
+- Release
+
 environment:
   matrix:
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
@@ -16,14 +19,6 @@ environment:
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       platform: x64
       GENERATOR: Visual Studio 15 2017 Win64
-
-
-configuration:
-- Release
-
-platform:
-- x64
-- x32
 
 matrix:
   fast_finish: true
