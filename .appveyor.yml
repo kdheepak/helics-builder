@@ -35,15 +35,15 @@ install:
   - set PATH=C:\ninja;%PATH%
 
 before_build:
-- call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" amd64
-- cmd: |-
-    git clone --branch v2.1.1 https://github.com/GMLC-TDC/HELICS
-    cd HELICS
-    mkdir build
-    cd build
-    cmake --version
-    cmake .. -G "%GENERATOR%" -DBOOST_ROOT=C:\Libraries\boost_1_67_0 -DENABLE_PACKAGE_BUILD=ON -DBUILD_RELEASE_ONLY=ON -DBUILD_C_SHARED_LIB=ON -DBUILD_SHARED_LIBS=ON
-    cmake --build . --config Release --target install
+  - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" amd64
+  - cmd: |-
+      git clone --branch v2.1.1 https://github.com/GMLC-TDC/HELICS
+      cd HELICS
+      mkdir build
+      cd build
+      cmake --version
+      cmake .. -G "%GENERATOR%" -DBOOST_ROOT=C:\Libraries\boost_1_67_0 -DENABLE_PACKAGE_BUILD=ON -DBUILD_RELEASE_ONLY=ON -DBUILD_C_SHARED_LIB=ON -DBUILD_SHARED_LIBS=ON
+      cmake --build . --config Release --target install
 
 build:
   project: HELICS/build/HELICS.sln
@@ -56,11 +56,4 @@ after_build:
 
 artifacts:
   - path: build/installer-output/Helics-*.exe
-
-only_commits:
-  files:
-    - CMakeLists.txt
-    - appveyor.yml
-    - src/
-    - cmake/
 
