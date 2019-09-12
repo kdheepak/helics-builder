@@ -13,18 +13,18 @@ configuration:
 environment:
   matrix:
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-      platform: x32
-      GENERATOR: Visual Studio 15 2017
-      # PYTHON: "C:\\Python27.10"
-      # PYTHON_VERSION: "2.7.10"
-      # PYTHON_ARCH: "32"
-
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       platform: x64
       GENERATOR: Visual Studio 15 2017 Win64
       # PYTHON: "C:\\Python27.10-x64"
       # PYTHON_VERSION: "2.7.10"
       # PYTHON_ARCH: "64"
+      
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      platform: Win32
+      GENERATOR: Visual Studio 15 2017
+      # PYTHON: "C:\\Python27.10"
+      # PYTHON_VERSION: "2.7.10"
+      # PYTHON_ARCH: "32"
 
 matrix:
   fast_finish: true
@@ -64,7 +64,7 @@ before_build:
       mkdir build
       cd build
       cmake --version
-      cmake .. -G "%GENERATOR%" -DBOOST_ROOT=C:\Libraries\boost_1_67_0 -DENABLE_PACKAGE_BUILD=ON -DBUILD_RELEASE_ONLY=ON -DBUILD_C_SHARED_LIB=ON -DBUILD_SHARED_LIBS=ON -DBUILD_PYTHON_INTERFACE=ON -DENABLE_SWIG=OFF -DCMAKE_BUILD_TYPE=Release
+      cmake .. -G "%GENERATOR%" -A%platform% -DBOOST_ROOT=C:\Libraries\boost_1_67_0 -DENABLE_PACKAGE_BUILD=ON -DBUILD_RELEASE_ONLY=ON -DBUILD_C_SHARED_LIB=ON -DBUILD_SHARED_LIBS=ON -DBUILD_PYTHON_INTERFACE=ON -DENABLE_SWIG=OFF -DCMAKE_BUILD_TYPE=Release
       cmake --build . --config Release --target install
 
 build:
