@@ -18,7 +18,7 @@ environment:
       # PYTHON: "C:\\Python27.10-x64"
       # PYTHON_VERSION: "2.7.10"
       # PYTHON_ARCH: "64"
-      
+
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       platform: Win32
       GENERATOR: Visual Studio 15 2017
@@ -63,7 +63,7 @@ before_build:
       mkdir build
       cd build
       cmake --version
-      cmake .. -G "%GENERATOR%" -A %platform% -DBOOST_ROOT=C:\Libraries\boost_1_67_0 -DENABLE_PACKAGE_BUILD=ON -DBUILD_RELEASE_ONLY=ON -DBUILD_C_SHARED_LIB=ON -DBUILD_SHARED_LIBS=ON -DBUILD_PYTHON_INTERFACE=ON -DENABLE_SWIG=OFF -DCMAKE_BUILD_TYPE=Release
+      cmake .. -G "%GENERATOR%" -A %platform% -DBOOST_ROOT=C:\Libraries\boost_1_67_0 -DENABLE_PACKAGE_BUILD=ON -DBUILD_RELEASE_ONLY=ON -DBUILD_C_SHARED_LIB=ON -DBUILD_SHARED_LIBS=ON -DBUILD_PYTHON_INTERFACE=ON -DENABLE_SWIG=OFF -DCMAKE_BUILD_TYPE=Release -DBUILD_HELICS_TESTS=OFF -DBUILD_HELICS_EXAMPLES=OFF
       cmake --build . --config Release --target install
 
 build:
@@ -73,6 +73,8 @@ build:
 
 after_build:
   - cd %APPVEYOR_BUILD_FOLDER%/HELICS/build
+  - pwd
+  - dir
   - cpack -B %cd%/installer-output
 
 artifacts:
