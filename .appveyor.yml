@@ -72,7 +72,7 @@ build:
   verbosity: minimal
 
 after_build:
-  - cd HELICS/build
+  - cd %APPVEYOR_BUILD_FOLDER%/HELICS/build
   - cpack -B %cd%/installer-output
 
 artifacts:
