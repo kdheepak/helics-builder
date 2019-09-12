@@ -49,12 +49,6 @@ install:
   # Upgrade to the latest version of pip to avoid it displaying warnings
   # about it being out of date.
   - python -m pip install --upgrade pip
-  # Install ninja
-  - mkdir C:\ninja
-  - appveyor DownloadFile https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip -FileName ninja.zip
-  - 7z x ninja.zip -oC:\ninja > nul
-  - set PATH=C:\ninja;%PATH%
-
 
 before_build:
   - cmd: |-
