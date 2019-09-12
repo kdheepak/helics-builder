@@ -78,5 +78,5 @@ after_build:
   - cpack -B %cd%/installer-output
 
 artifacts:
-  - path: %APPVEYOR_BUILD_FOLDER%/HELICS/build/installer-output/Helics-*.exe
+  - path: HELICS/build/installer-output/Helics-*.exe
 
