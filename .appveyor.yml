@@ -57,14 +57,13 @@ install:
 
 
 before_build:
-  - set Platform=
   - cmd: |-
       git clone --branch v2.1.1 https://github.com/GMLC-TDC/HELICS
       cd HELICS
       mkdir build
       cd build
       cmake --version
-      cmake .. -G "%GENERATOR%" -A%platform% -DBOOST_ROOT=C:\Libraries\boost_1_67_0 -DENABLE_PACKAGE_BUILD=ON -DBUILD_RELEASE_ONLY=ON -DBUILD_C_SHARED_LIB=ON -DBUILD_SHARED_LIBS=ON -DBUILD_PYTHON_INTERFACE=ON -DENABLE_SWIG=OFF -DCMAKE_BUILD_TYPE=Release
+      cmake .. -G "%GENERATOR%" -A %platform% -DBOOST_ROOT=C:\Libraries\boost_1_67_0 -DENABLE_PACKAGE_BUILD=ON -DBUILD_RELEASE_ONLY=ON -DBUILD_C_SHARED_LIB=ON -DBUILD_SHARED_LIBS=ON -DBUILD_PYTHON_INTERFACE=ON -DENABLE_SWIG=OFF -DCMAKE_BUILD_TYPE=Release
       cmake --build . --config Release --target install
 
 build:
