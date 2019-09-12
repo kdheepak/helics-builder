@@ -50,7 +50,6 @@ install:
   # about it being out of date.
   - python -m pip install --upgrade pip
   - choco install -y swig
-  - swig --version
 
 before_build:
   - cmd: |-
