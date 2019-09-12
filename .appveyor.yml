@@ -49,11 +49,6 @@ install:
   # Upgrade to the latest version of pip to avoid it displaying warnings
   # about it being out of date.
   - python -m pip install --upgrade pip
-  # Install ninja
-  - mkdir C:\ninja
-  - appveyor DownloadFile https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip -FileName ninja.zip
-  - 7z x ninja.zip -oC:\ninja > nul
-  - set PATH=C:\ninja;%PATH%
 
 
 before_build:
@@ -63,7 +58,7 @@ before_build:
       mkdir build
       cd build
       cmake --version
-      cmake .. -G "%GENERATOR%" -A %platform% -DBOOST_ROOT=C:\Libraries\boost_1_67_0 -DENABLE_PACKAGE_BUILD=ON -DBUILD_RELEASE_ONLY=ON -DBUILD_C_SHARED_LIB=ON -DBUILD_SHARED_LIBS=ON -DBUILD_PYTHON_INTERFACE=ON -DENABLE_SWIG=OFF -DCMAKE_BUILD_TYPE=Release -DBUILD_HELICS_TESTS=OFF -DBUILD_HELICS_EXAMPLES=OFF
+      cmake .. -G "%GENERATOR%" -A %platform% -DBOOST_ROOT=C:\Libraries\boost_1_67_0 -DENABLE_PACKAGE_BUILD=ON -DBUILD_RELEASE_ONLY=ON -DBUILD_C_SHARED_LIB=ON -DBUILD_SHARED_LIBS=ON -DBUILD_PYTHON2_INTERFACE=ON -DENABLE_SWIG=OFF -DCMAKE_BUILD_TYPE=Release -DBUILD_HELICS_TESTS=OFF -DBUILD_HELICS_EXAMPLES=OFF
       cmake --build . --config Release --target install
 
 build:
@@ -73,10 +68,8 @@ build:
 
 after_build:
   - cd %APPVEYOR_BUILD_FOLDER%/HELICS/build
-  - pwd
-  - dir
   - cpack -B %cd%/installer-output
 
 artifacts:
-  - path: build/installer-output/Helics-*.exe
+  - path: %APPVEYOR_BUILD_FOLDER%/HELICS/build/installer-output/Helics-*.exe
 
