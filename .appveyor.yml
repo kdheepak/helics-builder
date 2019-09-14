@@ -58,7 +58,7 @@ before_build:
       mkdir build
       cd build
       cmake --version
-      cmake .. -G "%GENERATOR%" -A %platform% -DBOOST_ROOT=C:\Libraries\boost_1_67_0 -DENABLE_PACKAGE_BUILD=ON -DBUILD_RELEASE_ONLY=ON -DBUILD_C_SHARED_LIB=ON -DBUILD_SHARED_LIBS=ON -DBUILD_PYTHON2_INTERFACE=ON -DCMAKE_BUILD_TYPE=Release -DBUILD_HELICS_TESTS=OFF -DBUILD_HELICS_EXAMPLES=OFF
+      cmake .. -G "%GENERATOR%" -A %platform% -DENABLE_PACKAGE_BUILD=ON -DBUILD_PYTHON2_INTERFACE=ON -DCMAKE_BUILD_TYPE=Release -DBUILD_HELICS_BOOST_TESTS=OFF -DBUILD_HELICS_EXAMPLES=OFF
       cmake --build . --config Release --target install
 
 build:
