@@ -13,18 +13,18 @@ configuration:
 environment:
   matrix:
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-      platform: x64
-      GENERATOR: Visual Studio 15 2017
-      # PYTHON: "C:\\Python27.10-x64"
-      # PYTHON_VERSION: "2.7.10"
-      # PYTHON_ARCH: "64"
-
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       platform: Win32
       GENERATOR: Visual Studio 15 2017
       # PYTHON: "C:\\Python27.10"
       # PYTHON_VERSION: "2.7.10"
       # PYTHON_ARCH: "32"
+	  
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      platform: x64
+      GENERATOR: Visual Studio 15 2017
+      # PYTHON: "C:\\Python27.10-x64"
+      # PYTHON_VERSION: "2.7.10"
+      # PYTHON_ARCH: "64"
 
 matrix:
   fast_finish: true
